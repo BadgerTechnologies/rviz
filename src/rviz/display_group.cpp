@@ -165,7 +165,13 @@ void DisplayGroup::removeAllDisplays()
   for( int i = displays_.size() - 1; i >= 0; i-- )
   {
     Display* child = displays_.takeAt( i );
-    Q_EMIT displayRemoved( child );
+    // The following line causes Rviz to SIGSEGV during shutdown if
+    // the configuration includes any nested groups, which can leave
+    // roscore in a bad state, so it is commented out as a quick hack.
+    // FIXME: This hack likely causes a small memory leak whenever a
+    // group is deleted interactively.
+    // Q_EMIT displayRemoved( child );
+
     child->setParent( NULL ); // prevent child destructor from calling getParent()->takeChild().
     child->setModel( NULL );
     child_indexes_valid_ = false;
