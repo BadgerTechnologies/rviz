@@ -35,7 +35,7 @@
 #include <QApplication>
 #include <QProgressDialog>
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 
 #include <rviz/display_factory.h>
 #include <rviz/display.h>
